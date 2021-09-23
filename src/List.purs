@@ -8,7 +8,8 @@ module List (
   snoc,
   length,
   head,
-  tail
+  tail,
+  last
 ) where
 
 import Prelude
@@ -56,3 +57,9 @@ head (x:_) = Just x
 tail :: ∀ a. List a -> Maybe (List a)
 tail Nil = Nothing
 tail (_:xs) = Just xs
+
+last :: ∀ a. List a -> Maybe a
+last Nil = Nothing
+last (x:xs) = if length xs == 0 
+              then Just x 
+              else last xs

@@ -6,7 +6,7 @@ import Prelude
 
 import Control.Monad.Free (Free)
 import Data.Maybe (Maybe(..), fromMaybe)
-import List (List(..), (:), (===), singleton, null, snoc, length, head, tail)
+import List (List(..), (:), (===), singleton, null, snoc, length, head, tail, last)
 import Test.Unit (TestF, suite, test)
 import Test.Unit.Assert (assert, assertFalse, equal)
 
@@ -39,3 +39,7 @@ listSuite = suite "List" do
     
     test "tail" do
       assert "should return the tail of list" $ ((fromMaybe Nil (tail (1:2:3:Nil))) === (2:3:Nil))
+    
+    test "last" do
+      equal (last (1:2:3:Nil)) (Just 3)
+      equal (last Nil :: Maybe Unit) Nothing
