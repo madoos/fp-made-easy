@@ -6,19 +6,7 @@ import Prelude
 
 import Control.Monad.Free (Free)
 import Data.Maybe (Maybe(..), fromMaybe)
-import List (
-  List(..), 
-  (:), 
-  (===), 
-  singleton, 
-  null, 
-  snoc, 
-  length, 
-  head, 
-  tail, 
-  last,
-  init
-)
+import List (List(..), head, init, last, length, null, singleton, snoc, tail, (:), (===))
 import Test.Unit (TestF, suite, test)
 import Test.Unit.Assert (assert, assertFalse, equal)
 

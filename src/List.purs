@@ -10,7 +10,8 @@ module List (
   head,
   tail,
   last,
-  init
+  init,
+  unconst
 ) where
 
 import Prelude
@@ -72,3 +73,7 @@ init xs = Just (init' xs)
    init' Nil = Nil
    init' (_:Nil) = Nil
    init' (y:ys) = y: init' ys
+
+unconst :: ∀ a. List a -> Maybe { head :: a, list :: List a }
+unconst Nil = Nothing
+unconst (x:xs) = Just { head: x, list: xs}
