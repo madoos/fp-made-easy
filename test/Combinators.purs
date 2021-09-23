@@ -20,5 +20,7 @@ combinatorsSuite = suite "Example Suite" do
       assert "apply should apply a function" $ C.apply (_ + 1) 1 == 2
     test "apply infixr as $" do
       assert "$ should apply a function as infix rigth asociative" $ ((_ * 2) C.$ 2) == 4
+    test "flipedApply" do
+      assert "flipedApply should apply a function fliped" $ C.flipedApply 3 (_ * 3) == 9
 
 

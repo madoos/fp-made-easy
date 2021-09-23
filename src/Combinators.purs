@@ -3,10 +3,9 @@ module Combinators (
     flip,
     const,
     apply,
-    ($)
+    ($),
+    flipedApply
 ) where 
-
-import Prelude
 
 identity :: ∀ a. a -> a
 identity a = a
@@ -20,3 +19,6 @@ const a _ = a
 apply :: ∀ a b. (a -> b) -> a -> b
 apply f a = f a
 infixr 0 apply as $
+
+flipedApply :: ∀ a b. a -> (a -> b) -> b
+flipedApply = flip apply
