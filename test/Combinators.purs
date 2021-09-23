@@ -8,7 +8,7 @@ import Test.Unit (TestF, suite, test)
 import Test.Unit.Assert (assert)
 
 combinatorsSuite :: Free TestF Unit
-combinatorsSuite = suite "Example Suite" do
+combinatorsSuite = suite "Combinators" do
     test "identity" do
       assert "identitiy should return te same input" $ (C.identity 1) == 1
       assert "identitiy should return te same input" $ (C.identity "a") == "a"
