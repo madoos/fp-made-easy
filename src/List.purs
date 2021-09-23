@@ -13,7 +13,8 @@ module List (
   init,
   unconst,
   index,
-  (!!)
+  (!!),
+  findIndex
 ) where
 
 import Prelude
@@ -90,4 +91,9 @@ index list i = go 0 i list
                                            then Just x
                                            else go (currentIndex + 1) expectedIndex xs
 infixl 8 index as !!
-          
+
+findIndex :: ∀ a. (a -> Boolean) -> List a -> Maybe Int
+findIndex = findIndex' 0
+  where
+    findIndex' _ _ Nil = Nothing
+    findIndex' i p (x:xs) = if p x then Just i else findIndex' (i + 1) p xs
