@@ -14,7 +14,8 @@ module List (
   unconst,
   index,
   (!!),
-  findIndex
+  findIndex,
+  findLastIndex
 ) where
 
 import Prelude
@@ -97,3 +98,13 @@ findIndex = findIndex' 0
   where
     findIndex' _ _ Nil = Nothing
     findIndex' i p (x:xs) = if p x then Just i else findIndex' (i + 1) p xs
+  
+findLastIndex :: ∀ a. (a -> Boolean) -> List a -> Maybe Int
+findLastIndex = findLastIndex' 0 (-1)
+  where 
+    findLastIndex' _ (-1) _ Nil = Nothing
+    findLastIndex' _ lastFindedIndex _ Nil = Just lastFindedIndex
+    findLastIndex' currentIndex lastFindedIndex p (x:xs) = if p x 
+                                                           then findLastIndex' (currentIndex + 1) currentIndex p xs
+                                                           else findLastIndex' (currentIndex + 1) lastFindedIndex p xs
+

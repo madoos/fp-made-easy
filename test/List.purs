@@ -6,7 +6,7 @@ import Prelude
 
 import Control.Monad.Free (Free)
 import Data.Maybe (Maybe(..), fromMaybe)
-import List (List(..), findIndex, head, index, init, last, length, null, singleton, snoc, tail, (!!), (:), (===))
+import List (List(..), findIndex, head, index, init, last, length, null, singleton, snoc, tail, (!!), (:), (===), findLastIndex)
 import Test.Unit (TestF, suite, test)
 import Test.Unit.Assert (assert, assertFalse, equal)
 
@@ -61,3 +61,8 @@ listSuite = suite "List" do
       equal (findIndex (_==3) (1:2:3:Nil)) (Just 2)
       equal (findIndex (_==3) (1:2:Nil)) (Nothing)
       equal (findIndex (_==3) Nil) (Nothing)
+    
+    test "findLastIndex" do
+      equal (findLastIndex (_==3) (3:3:3:Nil)) (Just 2)
+      equal (findLastIndex (_==10) (10:10:3:Nil)) (Just 1)
+      equal (findLastIndex (_==10) (1:2:3:Nil)) (Nothing)
