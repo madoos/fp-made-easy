@@ -11,7 +11,8 @@ module List (
   tail,
   last,
   init,
-  unconst
+  unconst,
+  index
 ) where
 
 import Prelude
@@ -77,3 +78,14 @@ init xs = Just (init' xs)
 unconst :: ∀ a. List a -> Maybe { head :: a, list :: List a }
 unconst Nil = Nothing
 unconst (x:xs) = Just { head: x, list: xs}
+
+index :: ∀ a. List a -> Int -> Maybe a
+index list i = go 0 i list
+  where 
+    go :: ∀ a. Int -> Int -> List a -> Maybe a
+    go _ _ Nil = Nothing
+    go _ expectedIndex _ | expectedIndex < 0 = Nothing 
+    go currentIndex expectedIndex (x:xs) = if currentIndex == expectedIndex 
+                                           then Just x
+                                           else go (currentIndex + 1) expectedIndex xs
+          
