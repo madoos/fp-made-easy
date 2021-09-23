@@ -4,7 +4,8 @@ module List (
   (===),
   equals,
   singleton,
-  null
+  null,
+  snoc
 ) where
 
 import Prelude
@@ -32,3 +33,7 @@ singleton a = a:Nil
 null :: ∀ a. List a -> Boolean
 null Nil = true
 null _ = false
+
+snoc :: ∀ a. List a -> a -> List a
+snoc Nil a = singleton a
+snoc (x:xs) a = x: snoc xs a
