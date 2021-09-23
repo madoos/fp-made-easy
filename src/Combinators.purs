@@ -4,7 +4,8 @@ module Combinators (
     const,
     apply,
     ($),
-    flipedApply
+    flipedApply,
+    (#)
 ) where 
 
 identity :: ∀ a. a -> a
@@ -22,3 +23,4 @@ infixr 0 apply as $
 
 flipedApply :: ∀ a b. a -> (a -> b) -> b
 flipedApply = flip apply
+infixl 0 flipedApply as #
