@@ -6,9 +6,9 @@ import Prelude
 
 import Control.Monad.Free (Free)
 import Test.Unit (TestF, suite, test)
-import Test.Unit.Assert (assert, assertFalse)
+import Test.Unit.Assert (assert, assertFalse, equal)
 
-import List (List(..), (:), (===), singleton, null, snoc)
+import List (List(..), (:), (===), singleton, null, snoc, length)
 
 listSuite :: Free TestF Unit
 listSuite = suite "List" do
@@ -28,9 +28,7 @@ listSuite = suite "List" do
       assertFalse "null should return false for not empty list" $ null (1:Nil)
     
     test "snoc" do
-      assert "snoc should put item in the las of list" (result === expected)
-        where
-         result = snoc (1:Nil) 2
-         expected = (1:2:Nil)
-    
-    
+      assert "snoc should put item in the las of list" (snoc (1:Nil) 2 === (1:2:Nil))
+
+    test "length" do
+      equal 3 $ length (1:2:3:Nil)  

@@ -5,7 +5,8 @@ module List (
   equals,
   singleton,
   null,
-  snoc
+  snoc,
+  length
 ) where
 
 import Prelude
@@ -37,3 +38,9 @@ null _ = false
 snoc :: ∀ a. List a -> a -> List a
 snoc Nil a = singleton a
 snoc (x:xs) a = x: snoc xs a
+
+length :: ∀ a. List a -> Int
+length = go 0
+  where 
+   go acc Nil = acc
+   go acc (_:xs) = go (acc + 1) xs
