@@ -18,5 +18,7 @@ combinatorsSuite = suite "Example Suite" do
       assert "const should return constant value" $ C.const 1 2 == 1
     test "apply" do
       assert "apply should apply a function" $ C.apply (_ + 1) 1 == 2
+    test "apply infixr as $" do
+      assert "$ should apply a function as infix rigth asociative" $ ((_ * 2) C.$ 2) == 4
 
 

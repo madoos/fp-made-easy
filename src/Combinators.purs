@@ -2,8 +2,11 @@ module Combinators (
     identity,
     flip,
     const,
-    apply
+    apply,
+    ($)
 ) where 
+
+import Prelude
 
 identity :: ∀ a. a -> a
 identity a = a
@@ -16,3 +19,4 @@ const a _ = a
 
 apply :: ∀ a b. (a -> b) -> a -> b
 apply f a = f a
+infixr 0 apply as $
