@@ -1,6 +1,8 @@
 module List (
   List(..),
-  (:)
+  (:),
+  (===),
+  equals
 ) where
 
 import Prelude
@@ -15,4 +17,9 @@ instance showList :: Show a => Show (List a) where
     show' (x:xs) = (show x) <> ":" <> (show' xs)
     show' Nil = "Nil"
 
-
+equals :: forall a. Eq a => List a -> List a -> Boolean
+equals Nil Nil = true
+equals _ Nil = false
+equals Nil _ = false
+equals (x:xs) (y:ys) = if x == y then equals xs ys else false
+infix 0 equals as ===
