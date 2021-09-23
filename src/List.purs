@@ -3,7 +3,8 @@ module List (
   (:),
   (===),
   equals,
-  singleton
+  singleton,
+  null
 ) where
 
 import Prelude
@@ -27,3 +28,7 @@ infix 0 equals as ===
 
 singleton :: ∀ a. a -> List a
 singleton a = a:Nil
+
+null :: ∀ a. List a -> Boolean
+null Nil = true
+null _ = false

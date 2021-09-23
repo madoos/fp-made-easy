@@ -5,9 +5,9 @@ module Test.List (
 import Prelude
 
 import Control.Monad.Free (Free)
-import List (List(..), (:), (===), singleton)
+import List (List(..), (:), (===), singleton, null)
 import Test.Unit (TestF, suite, test)
-import Test.Unit.Assert (assert)
+import Test.Unit.Assert (assert, assertFalse)
 
 listSuite :: Free TestF Unit
 listSuite = suite "List" do
@@ -19,3 +19,6 @@ listSuite = suite "List" do
       assert "list should to be diferents" $ ((2:2:3:Nil) === (1:2:3:Nil)) == false
     test "singleton" do
       assert "singleton should put a into list context" (singleton 1 === (1:Nil))
+    test "null" do
+      assert "null should return true for empty list" $ null Nil
+      assertFalse "null should return false for not empty list" $ null (1:Nil)
