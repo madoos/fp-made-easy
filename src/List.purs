@@ -7,7 +7,8 @@ module List (
   null,
   snoc,
   length,
-  head
+  head,
+  tail
 ) where
 
 import Prelude
@@ -51,3 +52,7 @@ length = go 0
 head :: ∀ a. List a -> Maybe a
 head Nil = Nothing
 head (x:_) = Just x
+
+tail :: ∀ a. List a -> Maybe (List a)
+tail Nil = Nothing
+tail (_:xs) = Just xs
