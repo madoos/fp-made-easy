@@ -2,7 +2,8 @@ module List (
   List(..),
   (:),
   (===),
-  equals
+  equals,
+  singleton
 ) where
 
 import Prelude
@@ -23,3 +24,6 @@ equals _ Nil = false
 equals Nil _ = false
 equals (x:xs) (y:ys) = if x == y then equals xs ys else false
 infix 0 equals as ===
+
+singleton :: ∀ a. a -> List a
+singleton a = a:Nil

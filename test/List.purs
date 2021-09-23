@@ -5,10 +5,9 @@ module Test.List (
 import Prelude
 
 import Control.Monad.Free (Free)
+import List (List(..), (:), (===), singleton)
 import Test.Unit (TestF, suite, test)
 import Test.Unit.Assert (assert)
-
-import List(List(..), (:), (===))
 
 listSuite :: Free TestF Unit
 listSuite = suite "List" do
@@ -18,3 +17,5 @@ listSuite = suite "List" do
     test "equals" do
       assert "list should to be equals" $ ((1:2:3:Nil) === (1:2:3:Nil)) == true
       assert "list should to be diferents" $ ((2:2:3:Nil) === (1:2:3:Nil)) == false
+    test "singleton" do
+      assert "singleton should put a into list context" (singleton 1 === (1:Nil))
