@@ -12,7 +12,8 @@ module List (
   last,
   init,
   unconst,
-  index
+  index,
+  (!!)
 ) where
 
 import Prelude
@@ -88,4 +89,5 @@ index list i = go 0 i list
     go currentIndex expectedIndex (x:xs) = if currentIndex == expectedIndex 
                                            then Just x
                                            else go (currentIndex + 1) expectedIndex xs
+infixl 8 index as !!
           

@@ -6,7 +6,7 @@ import Prelude
 
 import Control.Monad.Free (Free)
 import Data.Maybe (Maybe(..), fromMaybe)
-import List (List(..), head, init, last, length, null, singleton, snoc, tail, (:), (===), index)
+import List (List(..), head, init, last, length, null, singleton, snoc, tail, (:), (===), index, (!!))
 import Test.Unit (TestF, suite, test)
 import Test.Unit.Assert (assert, assertFalse, equal)
 
@@ -51,3 +51,8 @@ listSuite = suite "List" do
       equal (index (1:2:3:Nil) 0) (Just 1)
       equal (index (1:2:3:Nil) 10) (Nothing)
       equal (index (1:2:3:Nil) (-12)) (Nothing)
+    
+    test "index as !!" do
+      equal ((1:2:3:Nil)!!0) (Just 1)
+      equal ((1:2:3:Nil)!!10) (Nothing)
+      equal ((1:2:3:Nil)!!(-12)) (Nothing)
