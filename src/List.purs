@@ -6,10 +6,13 @@ module List (
   singleton,
   null,
   snoc,
-  length
+  length,
+  head
 ) where
 
 import Prelude
+
+import Data.Maybe (Maybe(..))
 
 data List a = Head a (List a) | Nil
 infixr 0 Head as :
@@ -44,3 +47,7 @@ length = go 0
   where 
    go acc Nil = acc
    go acc (_:xs) = go (acc + 1) xs
+
+head :: ∀ a. List a -> Maybe a
+head Nil = Nothing
+head (x:_) = Just x

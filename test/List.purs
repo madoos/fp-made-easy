@@ -5,10 +5,10 @@ module Test.List (
 import Prelude
 
 import Control.Monad.Free (Free)
+import Data.Maybe (Maybe(..))
+import List (List(..), (:), (===), singleton, null, snoc, length, head)
 import Test.Unit (TestF, suite, test)
 import Test.Unit.Assert (assert, assertFalse, equal)
-
-import List (List(..), (:), (===), singleton, null, snoc, length)
 
 listSuite :: Free TestF Unit
 listSuite = suite "List" do
@@ -31,4 +31,8 @@ listSuite = suite "List" do
       assert "snoc should put item in the las of list" (snoc (1:Nil) 2 === (1:2:Nil))
 
     test "length" do
-      equal 3 $ length (1:2:3:Nil)  
+      equal 3 $ length (1:2:3:Nil)
+    
+    test "head" do
+      equal (Just 1) $ head (1:2:3:Nil)
+      equal Nothing $ (head Nil :: Maybe Unit) 
