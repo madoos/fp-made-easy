@@ -6,7 +6,19 @@ import Prelude
 
 import Control.Monad.Free (Free)
 import Data.Maybe (Maybe(..), fromMaybe)
-import List (List(..), (:), (===), singleton, null, snoc, length, head, tail, last)
+import List (
+  List(..), 
+  (:), 
+  (===), 
+  singleton, 
+  null, 
+  snoc, 
+  length, 
+  head, 
+  tail, 
+  last,
+  init
+)
 import Test.Unit (TestF, suite, test)
 import Test.Unit.Assert (assert, assertFalse, equal)
 
@@ -43,3 +55,6 @@ listSuite = suite "List" do
     test "last" do
       equal (last (1:2:3:Nil)) (Just 3)
       equal (last Nil :: Maybe Unit) Nothing
+    
+    test "init" do
+      assert "should get init of list" $ ((fromMaybe Nil (init (1:2:3:Nil))) === (1:2:Nil))

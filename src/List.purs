@@ -9,7 +9,8 @@ module List (
   length,
   head,
   tail,
-  last
+  last,
+  init
 ) where
 
 import Prelude
@@ -63,3 +64,11 @@ last Nil = Nothing
 last (x:xs) = if length xs == 0 
               then Just x 
               else last xs
+
+init :: ∀ a. List a -> Maybe (List a)
+init Nil = Nothing
+init xs = Just (init' xs) 
+  where 
+   init' Nil = Nil
+   init' (_:Nil) = Nil
+   init' (y:ys) = y: init' ys
