@@ -16,7 +16,8 @@ module List (
   (!!),
   findIndex,
   findLastIndex,
-  reverse
+  reverse,
+  concat
 ) where
 
 import Prelude
@@ -113,3 +114,8 @@ reverse ol = go Nil ol
   where
    go rl Nil = rl
    go rl (x : xs) = go (x : rl) xs  
+
+concat :: ∀ a. List (List a) -> List a
+concat Nil = Nil
+concat (Nil:xs) = concat xs
+concat ((x:xs):xss) = x: concat (xs:xss)
