@@ -17,7 +17,8 @@ module List (
   findIndex,
   findLastIndex,
   reverse,
-  concat
+  concat,
+  filter
 ) where
 
 import Prelude
@@ -119,3 +120,7 @@ concat :: ∀ a. List (List a) -> List a
 concat Nil = Nil
 concat (Nil:xs) = concat xs
 concat ((x:xs):xss) = x: concat (xs:xss)
+
+filter :: ∀ a. (a -> Boolean) -> List a -> List a
+filter _ Nil = Nil
+filter p (x:xs) = if p x then x: filter p xs else filter p xs

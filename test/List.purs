@@ -23,7 +23,8 @@ import List (
   (===), 
   findLastIndex, 
   reverse,
-  concat
+  concat,
+  filter
 )
 import Test.Unit (TestF, suite, test)
 import Test.Unit.Assert (assert, assertFalse, equal)
@@ -90,3 +91,6 @@ listSuite = suite "List" do
     
     test "concat" do
       assert "should concat list of lists" ((concat ((1:2:Nil):(3:4:Nil):Nil)) ===  (1:2:3:4:Nil) )
+    
+    test "filter" do
+      assert "should filter items" ((filter (_ >= 4) (1:2:3:4:5:Nil)) === (4:5:Nil))
