@@ -6,7 +6,7 @@ import Prelude
 
 import Control.Monad.Free (Free)
 import Data.Maybe (Maybe(..), fromMaybe)
-import List (List(..), findIndex, head, index, init, last, length, null, singleton, snoc, tail, (!!), (:), (===), findLastIndex)
+import List (List(..), findIndex, head, index, init, last, length, null, singleton, snoc, tail, (!!), (:), (===), findLastIndex, reverse)
 import Test.Unit (TestF, suite, test)
 import Test.Unit.Assert (assert, assertFalse, equal)
 
@@ -66,3 +66,6 @@ listSuite = suite "List" do
       equal (findLastIndex (_==3) (3:3:3:Nil)) (Just 2)
       equal (findLastIndex (_==10) (10:10:3:Nil)) (Just 1)
       equal (findLastIndex (_==10) (1:2:3:Nil)) (Nothing)
+    
+    test "reverse" do
+      assert "should reverse the list" ((reverse (1:2:3:Nil)) === (3:2:1:Nil))

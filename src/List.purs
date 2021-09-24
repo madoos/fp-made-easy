@@ -15,11 +15,11 @@ module List (
   index,
   (!!),
   findIndex,
-  findLastIndex
+  findLastIndex,
+  reverse
 ) where
 
 import Prelude
-
 import Data.Maybe (Maybe(..))
 
 data List a = Head a (List a) | Nil
@@ -107,4 +107,9 @@ findLastIndex = findLastIndex' 0 (-1)
     findLastIndex' currentIndex lastFindedIndex p (x:xs) = if p x 
                                                            then findLastIndex' (currentIndex + 1) currentIndex p xs
                                                            else findLastIndex' (currentIndex + 1) lastFindedIndex p xs
-
+reverse :: List ~> List 
+reverse Nil = Nil
+reverse ol = go Nil ol 
+  where
+   go rl Nil = rl
+   go rl (x : xs) = go (x : rl) xs  
