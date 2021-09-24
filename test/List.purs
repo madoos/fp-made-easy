@@ -24,7 +24,8 @@ import List (
   findLastIndex, 
   reverse,
   concat,
-  filter
+  filter,
+  catMaybes
 )
 import Test.Unit (TestF, suite, test)
 import Test.Unit.Assert (assert, assertFalse, equal)
@@ -94,3 +95,6 @@ listSuite = suite "List" do
     
     test "filter" do
       assert "should filter items" ((filter (_ >= 4) (1:2:3:4:5:Nil)) === (4:5:Nil))
+    
+    test "catMaybies" do
+      assert "catMaybes should remove Nothing and unwrap Just" (catMaybes ((Just 1):(Nothing):(Just 2):Nil) === (1:2:Nil)) 

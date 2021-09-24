@@ -18,10 +18,12 @@ module List (
   findLastIndex,
   reverse,
   concat,
-  filter
+  filter,
+  catMaybes
 ) where
 
 import Prelude
+
 import Data.Maybe (Maybe(..))
 
 data List a = Head a (List a) | Nil
@@ -124,3 +126,9 @@ concat ((x:xs):xss) = x: concat (xs:xss)
 filter :: ∀ a. (a -> Boolean) -> List a -> List a
 filter _ Nil = Nil
 filter p (x:xs) = if p x then x: filter p xs else filter p xs
+
+catMaybes :: ∀ a. List (Maybe a) -> List a
+catMaybes Nil = Nil
+catMaybes (x:xs) = case x of
+                    Just a -> (a: catMaybes xs)
+                    Nothing -> catMaybes xs
