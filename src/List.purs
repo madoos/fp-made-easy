@@ -25,7 +25,9 @@ module List (
   take',
   drop,
   takeWhile,
-  dropWhile
+  dropWhile,
+  takeEnd,
+  dropEnd
 ) where
 
 import Prelude
@@ -167,3 +169,9 @@ takeWhile p (x:xs) = if p x then x: (takeWhile p xs) else Nil
 dropWhile :: ∀ a. (a -> Boolean) -> List a -> List a
 dropWhile _ Nil = Nil
 dropWhile p list@(x:xs) = if p x then dropWhile p xs else list
+
+takeEnd :: ∀ a. Int -> List a -> List a
+takeEnd n = reverse >>> take n >>> reverse
+
+dropEnd :: ∀ a. Int -> List a -> List a
+dropEnd n = reverse >>> drop n >>> reverse

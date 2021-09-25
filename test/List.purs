@@ -6,7 +6,7 @@ import Prelude
 
 import Control.Monad.Free (Free)
 import Data.Maybe (Maybe(..), fromMaybe)
-import List (List(..), findIndex, head, index, init, last, length, null, singleton, snoc, tail, (!!), (:), (===), findLastIndex, reverse, concat, filter, catMaybes, range, take, take', drop, takeWhile, dropWhile)
+import List (List(..), findIndex, head, index, init, last, length, null, singleton, snoc, tail, (!!), (:), (===), findLastIndex, reverse, concat, filter, catMaybes, range, take, take', drop, takeWhile, dropWhile, takeEnd, dropEnd)
 import Test.Unit (TestF, suite, test)
 import Test.Unit.Assert (assert, assertFalse, equal)
 
@@ -102,3 +102,9 @@ listSuite = suite "List" do
       assert "dropWhile" $ (dropWhile (_==1) (1:2:3:Nil) === (2:3:Nil))
       assert "dropWhile" $ (dropWhile (_==1) (2:1:2:3:Nil) === (2:1:2:3:Nil))
       assert "dropWhile" $ (dropWhile (_==1) Nil === Nil)
+    
+    test "takeEnd" do
+      assert "takeEnd" $ (takeEnd 1 (1:2:3:Nil) === (3:Nil))
+
+    test "dropEnd" do
+      assert "dropEnd" $ (dropEnd 1 (1:2:3:Nil) === (1:2:Nil))
