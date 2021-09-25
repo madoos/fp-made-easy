@@ -20,7 +20,9 @@ module List (
   concat,
   filter,
   catMaybes,
-  range
+  range,
+  take,
+  take'
 ) where
 
 import Prelude
@@ -137,3 +139,15 @@ catMaybes (x:xs) = case x of
 range :: Int -> Int -> List Int
 range start end | start == end = singleton start
                 | otherwise = start : range (start+1) end
+
+take :: ∀ a. Int -> List a -> List a
+take n = go Nil n >>> reverse
+  where 
+    go listToTake 0 _ = listToTake
+    go listToTake _ Nil = listToTake
+    go listToTake n' (x:xs) = go (x:listToTake) (n' - 1) xs
+
+take' :: ∀ a. Int -> List a -> List a
+take' _ Nil = Nil
+take' 0 list = list
+take' n (x:xs) = x: take (n-1) xs

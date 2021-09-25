@@ -26,7 +26,9 @@ import List (
   concat,
   filter,
   catMaybes,
-  range
+  range,
+  take,
+  take'
 )
 import Test.Unit (TestF, suite, test)
 import Test.Unit.Assert (assert, assertFalse, equal)
@@ -102,3 +104,11 @@ listSuite = suite "List" do
     
     test "range" do
       assert "range" ((range 1 3) ===  (1:2:3:Nil))
+    
+    test "take" do
+      assert "take should take n items" ( (take 3 (1:2:3:4:5:Nil)) === (1:2:3:Nil) )
+      assert "take should take n items" ( (take 3 (Nil :: List Unit)) === (Nil :: List Unit) )
+   
+    test "take'" do
+      assert "take' should take' n items" ( (take' 3 (1:2:3:4:5:Nil)) === (1:2:3:Nil) )
+      assert "take' should take' n items" ( (take' 3 (Nil :: List Unit)) === (Nil :: List Unit) )
