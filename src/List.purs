@@ -27,12 +27,14 @@ module List (
   takeWhile,
   dropWhile,
   takeEnd,
-  dropEnd
+  dropEnd,
+  zip
 ) where
 
 import Prelude
 
 import Data.Maybe (Maybe(..))
+import Data.Tuple(Tuple(..))
 
 data List a = Head a (List a) | Nil
 infixr 0 Head as :
@@ -175,3 +177,8 @@ takeEnd n = reverse >>> take n >>> reverse
 
 dropEnd :: ∀ a. Int -> List a -> List a
 dropEnd n = reverse >>> drop n >>> reverse
+
+zip :: ∀ a b. List a -> List b -> List (Tuple a b)
+zip Nil _ = Nil
+zip _ Nil = Nil
+zip (x:xs) (y:ys) = (Tuple x y): zip xs ys
