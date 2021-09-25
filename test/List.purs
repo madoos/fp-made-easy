@@ -28,7 +28,8 @@ import List (
   catMaybes,
   range,
   take,
-  take'
+  take',
+  drop
 )
 import Test.Unit (TestF, suite, test)
 import Test.Unit.Assert (assert, assertFalse, equal)
@@ -112,3 +113,7 @@ listSuite = suite "List" do
     test "take'" do
       assert "take' should take' n items" ( (take' 3 (1:2:3:4:5:Nil)) === (1:2:3:Nil) )
       assert "take' should take' n items" ( (take' 3 (Nil :: List Unit)) === (Nil :: List Unit) )
+
+    test "drop'" do
+      assert "drop' should remove' n items" ( (drop 4 (1:2:3:4:5:Nil)) === (5:Nil) )
+      assert "drop' should remove' n items" ( (drop 3 (Nil :: List Unit)) === (Nil :: List Unit) )

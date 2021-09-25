@@ -22,7 +22,8 @@ module List (
   catMaybes,
   range,
   take,
-  take'
+  take',
+  drop
 ) where
 
 import Prelude
@@ -151,3 +152,8 @@ take' :: ∀ a. Int -> List a -> List a
 take' _ Nil = Nil
 take' 0 list = list
 take' n (x:xs) = x: take (n-1) xs
+
+drop :: ∀ a. Int -> List a -> List a
+drop _ Nil = Nil
+drop 0 list = list
+drop n (_:xs) = drop (n - 1) xs
