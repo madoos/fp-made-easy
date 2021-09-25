@@ -28,23 +28,17 @@ module List (
   dropWhile,
   takeEnd,
   dropEnd,
-  zip
+  zip,
+  unzip
 ) where
 
 import Prelude
 
 import Data.Maybe (Maybe(..))
-import Data.Tuple(Tuple(..))
+import Data.Tuple (Tuple(..), fst, snd)
 
 data List a = Head a (List a) | Nil
 infixr 0 Head as :
-
-instance showList :: Show a => Show (List a) where
-  show = show'
-   where
-    show' :: ∀ a. (Show a) => List a -> String
-    show' (x:xs) = (show x) <> ":" <> (show' xs)
-    show' Nil = "Nil"
 
 equals :: forall a. Eq a => List a -> List a -> Boolean
 equals Nil Nil = true
@@ -182,3 +176,26 @@ zip :: ∀ a b. List a -> List b -> List (Tuple a b)
 zip Nil _ = Nil
 zip _ Nil = Nil
 zip (x:xs) (y:ys) = (Tuple x y): zip xs ys
+
+unzip :: ∀ a b. List (Tuple a b) -> Tuple (List a) (List b)
+unzip Nil = Tuple Nil Nil
+unzip list = (Tuple (allFst list) (allSnd list))
+  where 
+    allFst :: List (Tuple a b) -> List a 
+    allFst Nil = Nil
+    allFst (x:xs) = fst x: allFst xs
+    allSnd :: List (Tuple a b) -> List b 
+    allSnd Nil = Nil
+    allSnd (x:xs) = snd x: allSnd xs
+    allWith f (x:xs) = f x: allWith f xs
+    allWith _ Nil = Nil
+
+instance showList :: Show a => Show (List a) where
+  show = show'
+   where
+    show' :: ∀ a. (Show a) => List a -> String
+    show' (x:xs) = (show x) <> ":" <> (show' xs)
+    show' Nil = "Nil"
+
+instance eqList :: Eq a => Eq (List a) where
+  eq = equals

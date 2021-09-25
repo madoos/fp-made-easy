@@ -7,7 +7,7 @@ import Prelude
 import Control.Monad.Free (Free)
 import Data.Maybe (Maybe(..), fromMaybe)
 import Data.Tuple(Tuple(..))
-import List (List(..), findIndex, head, index, init, last, length, null, singleton, snoc, tail, (!!), (:), (===), findLastIndex, reverse, concat, filter, catMaybes, range, take, take', drop, takeWhile, dropWhile, takeEnd, dropEnd, zip)
+import List (List(..), findIndex, head, index, init, last, length, null, singleton, snoc, tail, (!!), (:), (===), findLastIndex, reverse, concat, filter, catMaybes, range, take, take', drop, takeWhile, dropWhile, takeEnd, dropEnd, zip, unzip)
 import Test.Unit (TestF, suite, test)
 import Test.Unit.Assert (assert, assertFalse, equal)
 
@@ -116,3 +116,5 @@ listSuite = suite "List" do
       assert "zip" $ ( zip (Nil :: List Int) (1:Nil) === Nil )
       assert "zip" $ ( zip (1:Nil) (Nil :: List Int) === Nil )
 
+    test "unzip" do
+      equal (unzip ((Tuple 1 "a"):(Tuple 2 "b"):Nil)) (Tuple (1:2:Nil) ("a":"b":Nil))
