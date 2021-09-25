@@ -6,31 +6,7 @@ import Prelude
 
 import Control.Monad.Free (Free)
 import Data.Maybe (Maybe(..), fromMaybe)
-import List (
-  List(..), 
-  findIndex, 
-  head, 
-  index, 
-  init, 
-  last, 
-  length, 
-  null, 
-  singleton, 
-  snoc, 
-  tail, 
-  (!!), 
-  (:), 
-  (===), 
-  findLastIndex, 
-  reverse,
-  concat,
-  filter,
-  catMaybes,
-  range,
-  take,
-  take',
-  drop
-)
+import List (List(..), findIndex, head, index, init, last, length, null, singleton, snoc, tail, (!!), (:), (===), findLastIndex, reverse, concat, filter, catMaybes, range, take, take', drop, takeWhile)
 import Test.Unit (TestF, suite, test)
 import Test.Unit.Assert (assert, assertFalse, equal)
 
@@ -117,3 +93,7 @@ listSuite = suite "List" do
     test "drop'" do
       assert "drop' should remove' n items" ( (drop 4 (1:2:3:4:5:Nil)) === (5:Nil) )
       assert "drop' should remove' n items" ( (drop 3 (Nil :: List Unit)) === (Nil :: List Unit) )
+    
+    test "takeWhile" do
+      assert "takeWhile" $ (takeWhile (_==1) (1:2:3:Nil) === (1:Nil))
+      assert "takeWhile" $ (takeWhile (_==1) Nil === Nil)
