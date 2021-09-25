@@ -25,7 +25,8 @@ import List (
   reverse,
   concat,
   filter,
-  catMaybes
+  catMaybes,
+  range
 )
 import Test.Unit (TestF, suite, test)
 import Test.Unit.Assert (assert, assertFalse, equal)
@@ -98,3 +99,6 @@ listSuite = suite "List" do
     
     test "catMaybies" do
       assert "catMaybes should remove Nothing and unwrap Just" (catMaybes ((Just 1):(Nothing):(Just 2):Nil) === (1:2:Nil)) 
+    
+    test "range" do
+      assert "range" ((range 1 3) ===  (1:2:3:Nil))

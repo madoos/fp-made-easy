@@ -19,7 +19,8 @@ module List (
   reverse,
   concat,
   filter,
-  catMaybes
+  catMaybes,
+  range
 ) where
 
 import Prelude
@@ -132,3 +133,7 @@ catMaybes Nil = Nil
 catMaybes (x:xs) = case x of
                     Just a -> (a: catMaybes xs)
                     Nothing -> catMaybes xs
+
+range :: Int -> Int -> List Int
+range start end | start == end = singleton start
+                | otherwise = start : range (start+1) end
