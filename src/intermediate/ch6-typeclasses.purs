@@ -1,7 +1,7 @@
 module Ch6.Typeclasses (
   Direction,
   Address,
-  getDirection,
+  getDirectionFromAdress,
   run
 ) where
 
@@ -38,8 +38,31 @@ derive instance genericResidence :: Generic Residence _
 instance showResidence :: Show Residence where show = genericShow
 derive instance eqResidence :: Eq Residence
 
-getDirection :: Address -> Direction
-getDirection { street, city, state, zip } = Direction (street <> ", " <> city <> ", " <> state <> ", " <> zip)
+{-
+Remove boilerplate using typeclasses to get for all data types 
+1- Creatin typeclass HasAdress as interface 
+2- Define instances for all types
+3- create getDirections polymorpic
+-}
+
+getDirectionFromAdress :: Address -> Direction
+getDirectionFromAdress { street, city, state, zip } = Direction (street <> ", " <> city <> ", " <> state <> ", " <> zip)
+
+class HasAdress a where 
+  getAdress :: a -> Address
+
+instance hasAdressPerson :: HasAdress Person where 
+  getAdress (Person x) = x.adress
+
+instance hasAddressCompany :: HasAdress Company where 
+  getAdress (Company x) = x.adress
+
+instance hasAdressResidence :: HasAdress Residence where 
+  getAdress (Home adress) = adress
+  getAdress (Facility adress) = adress
+
+getDirection :: ∀ a. Show a => HasAdress a => a -> Direction
+getDirection a = getDirectionFromAdress $ getAdress a
 
 run :: Effect Unit
 run = do
@@ -66,4 +89,9 @@ run = do
   logShow homeResidence
   logShow $ homeResidence == homeResidence
 
-  logShow $ getDirection home
+  logShow $ getDirectionFromAdress home
+
+  logShow $ "Use typeclass HasAdress to create getDirection polymorpic"
+  logShow $ getDirection person
+  logShow $ getDirection company
+  logShow $ getDirection homeResidence
