@@ -19,6 +19,7 @@ to generate this file without the comments in this block.
   , "prelude"
   , "psci-support"
   , "test-unit"
+  , "tuples"
   ]
 , packages = ./packages.dhall
 , sources = [ "src/**/*.purs", "test/**/*.purs" ]

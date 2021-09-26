@@ -191,11 +191,8 @@ unzip list = (Tuple (allFst list) (allSnd list))
     allWith _ Nil = Nil
 
 instance showList :: Show a => Show (List a) where
-  show = show'
-   where
-    show' :: ∀ a. (Show a) => List a -> String
-    show' (x:xs) = (show x) <> ":" <> (show' xs)
-    show' Nil = "Nil"
+    show (x:xs) = (show x) <> ":" <> (show xs)
+    show Nil = "Nil"
 
 instance eqList :: Eq a => Eq (List a) where
   eq = equals
