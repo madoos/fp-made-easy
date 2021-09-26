@@ -7,6 +7,8 @@ import Effect.Console (log)
 import Ch6.Typeclasses as Typeclasses
 import Eq as Eq
 import Place as Place
+import DerivedInstances as DI
+import DeriveNewtype as DN
 
 main :: Effect Unit
 main = do
@@ -14,3 +16,5 @@ main = do
   Typeclasses.run
   Eq.run
   Place.run
+  DI.run
+  DN.run
